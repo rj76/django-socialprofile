@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block header %}{% endblock %}
-{% block page_role %}data-role="dialog"{% endblock %}
+
+{% block page_title %} {{ block.super }} - Delete account{% endblock %}
+
 {% block content %}
     <div data-role="header" data-theme="b">
         <h1>{% trans 'Really Delete?' %}</h1>

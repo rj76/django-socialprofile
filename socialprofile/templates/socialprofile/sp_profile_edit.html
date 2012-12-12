@@ -1,29 +1,24 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n bootstrap %}
 {% load socialprofile_tags %}
 
-{% block headtitle %}{% trans "Profile for " %}{{ user.username }}{% endblock %}
-
-{% block header %}
-    <header data-role="header" data-theme="b" data-position="fixed">
-        <a href="{% url sp_profile_view_page %}?returnTo={{ form.returnTo.value }}"
-           data-role="button">{% trans "Cancel" %}</a>
-
-        <h1 class="ui-title">{% trans "Profile" %}</h1>
-        <a href="#" data-role="button" onclick="$('#sp-profile-form').submit();">{% trans "Done" %}</a>
-    </header>
-{% endblock %}
+{% block page_title %}{{ block.super }} - {% trans "Profile for " %}{{ user.username }}{% endblock %}
 
 {% block content %}
-    <section title="profile" data-role="content">
-        {% if user.social_profile.image_url %}
-            <img src="{{ user.social_profile.image_url }}"/>
-        {% endif %}
-        <form action="{%  url sp_profile_edit_page %}" method="post" id="sp-profile-form" data-ajax="false">
-            {% csrf_token %}
-            <ul>
-                {{ form.as_ul }}
-            </ul>
+    <div>
+        <form action="{%  url sp_profile_edit_page %}" method="post" id="sp-profile-form" class="well edit form-horizontal">
+            <fieldset>
+                <legend>{% trans 'Edit profile' %}</legend>
+                {% if user.social_profile.image_url %}
+                    <img src="{{ user.social_profile.image_url }}"/>
+                {% endif %}
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary" value="{% trans "Verstuur" %}" />
+                    <input type="button" class="btn" value="{% trans "Annuleer" %}" onclick="document.location.href='{% url sp_profile_view_page %}'" />
+                </div>
+            </fieldset>
         </form>
         <h3 style="margin-left:10px;">{% trans "Social Connections" %}</h3>
         {% if user.social_auth.all.count == 1 %}
@@ -47,5 +42,5 @@
         <br>
         <br>
         <a href="{% url sp_delete_page %}" data-role="button" data-theme="e">{% trans "Delete Account" %}</a>
-    </section>
+    </div>
 {% endblock %}

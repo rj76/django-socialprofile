@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block header %}{% endblock %}
-{% block page_role %}id="sp-login-modal" data-role="dialog"{% endblock %}
+
+{% block page_title %} {{ block.super }} - Sign In{% endblock %}
+
 {% block content %}
-    <div data-role="header" data-theme="b">
+    <div>
         <h1>{% trans 'Sign In' %}</h1>
     </div>
-    <div data-role="content" data-theme="c" title="{% trans 'Sign In' %}">
-        <a href="{% url socialauth_begin 'google-oauth2' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"
-           id="sp-google-button" data-ajax="false" data-role="button" data-theme="b" data-icon="custom"
-           data-iconshadow="false">{% trans "Google" %}</a>
-        <a href="{% url socialauth_begin 'twitter' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"
-           id="sp-twitter-button" data-ajax="false" data-role="button" data-theme="b" data-icon="custom"
-           data-iconshadow="false">{% trans "Twitter" %}</a>
-        <a href="{% url socialauth_begin 'facebook' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}"
-           id="sp-facebook-button" data-ajax="false" data-role="button" data-theme="b" data-icon="custom"
-           data-iconshadow="false">{% trans "Facebook" %}</a>
+    <div title="{% trans 'Sign In' %}">
+        <a href="{% url socialauth_begin 'google-oauth2' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}">
+            <img alt="{% trans "Google" %}" title="{% trans "Google" %}" src="{{ STATIC_URL }}socialprofile/img/google-icon.png" />
+        </a>
+        <a href="{% url socialauth_begin 'twitter' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}">
+            <img alt="{% trans "Twitter" %}" title="{% trans "Twitter" %}" src="{{ STATIC_URL }}socialprofile/img/twitter-icon.png" />
+        </a>
+        <a href="{% url socialauth_begin 'facebook' %}{% if next_url and next_param %}?{{ next_param }}={{ next_url }}{% endif %}">
+            <img alt="{% trans "Facebook" %}" title="{% trans "Facebook" %}" src="{{ STATIC_URL }}socialprofile/img/facebook-icon.png" />
+        </a>
     </div>
 {% endblock %}
 {% block footer %}{% endblock %}
