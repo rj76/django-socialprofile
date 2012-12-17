@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     url(r'^$', never_cache(SocialProfileView.as_view()), name="sp_profile_view_page"),
 
     # Profile Other View
-    url(r'^view/(?P<username>\w+)/$', SocialProfileView.as_view(), name="sp_profile_other_view_page"),
+    url(r'^view/(?P<username>[a-zA-Z0-9_.-]+)/$', SocialProfileView.as_view(), name="sp_profile_other_view_page"),
 
     # Profile Edit
     url(r'^edit/$', never_cache(login_required(SocialProfileEditView.as_view())), name="sp_profile_edit_page"),
