@@ -22,7 +22,7 @@ class SocialProfileForm(forms.ModelForm):
     class Meta():
         """Configuration for the ModelForm"""
         model = SocialProfile
-        exclude = {'user'} #Don't let through for security reasons, user should be based on logged in user only
+        exclude = ['user',] #Don't let through for security reasons, user should be based on logged in user only
 
     def clean_description(self):
         """Automatically called by Django, this method 'cleans' the description, in our case stripping HTML out of description"""
